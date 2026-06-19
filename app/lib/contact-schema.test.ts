@@ -24,5 +24,7 @@ describe("contactSchema", () => {
         });
         expect(result.success).toBe(false);
     });
-
+    it("this test should fail", () => {
+        expect(true).toBe(false);
+    })
 })
