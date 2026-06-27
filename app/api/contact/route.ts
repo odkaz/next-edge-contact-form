@@ -1,5 +1,5 @@
-import { contactSchema } from "@/app/lib/contact-schema";
-import { resend } from "@/app/lib/resend";
+import { contactSchema } from "@/app/schemas/contact-schema";
+import { contactService } from "@/app/services/contact.service";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -18,13 +18,7 @@ export async function POST(request: Request) {
 
   const data = result.data;
   console.log(data);
-  const res = await resend.emails.send({
-    from: process.env.CONTACT_FROM_EMAIL!,
-    to: process.env.CONTACT_TO_EMAIL!,
-    subject: "New contact form submission",
-    text: JSON.stringify(data, null, 2),
-  });
-
+  const res = await contactService.sendContactEmail(data);
   console.log(res);
   return Response.json({
     success: true,

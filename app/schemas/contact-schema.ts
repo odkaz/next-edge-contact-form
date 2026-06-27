@@ -17,3 +17,5 @@ export const contactSchema = z.object({
 
   privacyAccepted: z.literal(true),
 });
+
+export type ContactForm = z.infer<typeof contactSchema>;
